@@ -4,4 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title_Scene.unity
+  - enabled: 1
+    path: Assets/Scenes/Help_Scene.unity
+  - enabled: 1
+    path: Assets/Scenes/Credit_Scene.unity
+  - enabled: 1
+    path: Assets/Spaceship Files/Spaceship Flight Test.unity
