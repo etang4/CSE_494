@@ -1,5 +1,5 @@
 ﻿#pragma strict
-var beaconCount : int;
+//var beaconCount : int;
 var text: UI.Text;
 var textDisplay: String;
 

@@ -2,11 +2,13 @@
 
 var Text : UI.Text;
 var textDisplay: String;
+//var mineral: GameObject;
 
 private var range: float = 10.0f;
 
 private var t : Transform;
 private var player:  Transform;
+private var minFlag: boolean = false;
 
 function Awake()
 {
@@ -21,15 +23,11 @@ function OnMouseDown ()
 		if(beaconInventory.beaconCount == 3)
 		{
 			Destroy (gameObject); 
+			minFlag = true;
 			Text.text = textDisplay;
-			Text.enabled = false;
+			Text.enabled = false;		
 		}
 	}
-}
-
-function Update()
-{
-
 }
 
 function Distance()
