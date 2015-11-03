@@ -14,6 +14,7 @@ public class QuestManager : MonoBehaviour {
     public GameObject QuestPanel;
     public GameObject InterestingFactPanel;
     public GameObject NPCZone;
+    public int NextLevelIndexToLoad;
 
     //GUIText assigned at Start()
     Text NPCPanelText;
@@ -81,7 +82,7 @@ public class QuestManager : MonoBehaviour {
 
         if (other.gameObject == Spaceship)
         {
-            Application.LoadLevel(1);
+            Application.LoadLevel(NextLevelIndexToLoad);
         }
     }
 

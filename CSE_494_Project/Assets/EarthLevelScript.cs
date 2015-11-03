@@ -7,6 +7,10 @@ public class EarthLevelScript : MonoBehaviour {
 
     public GameObject player;
     public GameObject DialogPanel;
+    public GameObject QuestPanel;
+    public GameObject QuestButton;
+    public GameObject InfoPanel;
+    public GameObject InfoButton;
     public string[] textPanels;
     public string[] CollectedMineraltextPanels;
     Text textPanelText;
@@ -50,7 +54,15 @@ public class EarthLevelScript : MonoBehaviour {
             player.GetComponent<FirstPersonController>().enabled = true;
             sizeOfTextPanels = CollectedMineraltextPanels.Length;
             currentPanel = 0;
-            GameObject.Find("Dexter").GetComponent<DexterAI>().canMove = true;
+            //First time talking to Dr. Nelson
+            if (!PlayerPrefs.HasKey("hasEarthinite"))
+            {
+                GameObject.Find("Dexter").GetComponent<DexterAI>().canMove = true;
+                QuestPanel.gameObject.SetActive(true);
+                QuestButton.gameObject.SetActive(true);
+                InfoPanel.gameObject.SetActive(true);
+                InfoButton.gameObject.SetActive(true);
+            }
         }
     }
 
