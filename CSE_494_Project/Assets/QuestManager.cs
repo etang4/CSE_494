@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour {
     public GameObject Spaceship; //The spaceship in this level
     public GameObject[] beaconsInScene; //The beacons in this level
     public string[] InterestingFact; //Interesting fact corresponding to beacon[] index
+    public string[] InterestingFactTitle;
     public GameObject NPCPanel;
     public GameObject QuestPanel;
     public GameObject InterestingFactPanel;
@@ -20,6 +21,7 @@ public class QuestManager : MonoBehaviour {
     Text NPCPanelText;
     Text QuestPanelText;
     Text InterestingFactPanelText;
+    Text InterestingFactTitleText;
     
     void Awake()
     {
@@ -32,6 +34,7 @@ public class QuestManager : MonoBehaviour {
         NPCPanelText = NPCPanel.transform.GetChild(1).GetComponent<Text>();
         QuestPanelText = QuestPanel.transform.GetChild(1).GetComponent<Text>();
         InterestingFactPanelText = InterestingFactPanel.transform.GetChild(1).GetComponent<Text>();
+        InterestingFactTitleText = InterestingFactPanel.transform.GetChild(0).GetComponent<Text>();
     }
 	
 	// Update is called once per frame
@@ -54,6 +57,7 @@ public class QuestManager : MonoBehaviour {
                 other.gameObject.SetActive(false);
                 //Displays corresponding interesting fact
                 InterestingFactPanelText.text = InterestingFact[i];
+                InterestingFactTitleText.text = InterestingFactTitle[i];
                 InterestingFactPanel.SetActive(true);
                 //Reduce the number of beacon remaining
                 QuestPanelText.GetComponent<QuestDialog>().NumOfBeaconRemaining--;
