@@ -42,9 +42,16 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         private Rigidbody m_Rigidbody;
 	    WheelCollider[] m_WheelColliders;
 
+        private float m_MaxEnginePowerOriginal;
+        private float m_MaxEnginePowerOriginal2;
+        private float m_MaxEnginePowerOriginal3;
+
 
         private void Start()
         {
+            m_MaxEnginePowerOriginal = m_MaxEnginePower;
+            m_MaxEnginePowerOriginal2 = m_MaxEnginePower * 10;
+            m_MaxEnginePowerOriginal3 = m_MaxEnginePower * 100;
             m_Rigidbody = GetComponent<Rigidbody>();
             // Store original drag settings, these are modified during flight.
             m_OriginalDrag = m_Rigidbody.drag;
@@ -57,6 +64,22 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 					componentsInChild.motorTorque = 0.18f;
 				}
 			}
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                m_MaxEnginePower = m_MaxEnginePowerOriginal;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                m_MaxEnginePower = m_MaxEnginePowerOriginal2;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                m_MaxEnginePower = m_MaxEnginePowerOriginal3;
+            }
         }
 
 
