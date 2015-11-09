@@ -85,6 +85,30 @@ public class QuestManager : MonoBehaviour {
             NPCZone.GetComponent<BoxCollider>().enabled = true;
         }
 
+		if (other.gameObject.name == "Venusite")
+		{
+			PlayerPrefs.SetInt("hasVenusite", 1);
+			other.gameObject.SetActive(false);
+			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+			checkIfHasAllMinerals();
+			//Allow spaceship trigger
+			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+		}
+
+
+		if (other.gameObject.name == "Jupiterite")
+		{
+			PlayerPrefs.SetInt("hasJupiterite", 1);
+			other.gameObject.SetActive(false);
+			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+			checkIfHasAllMinerals();
+			//Allow spaceship trigger
+			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+		}
+
+
         if (other.gameObject.name == "Saturnite")
         {
             PlayerPrefs.SetInt("hasSaturnite", 1);
@@ -95,6 +119,7 @@ public class QuestManager : MonoBehaviour {
             //Allow spaceship trigger
             Spaceship.GetComponent<CapsuleCollider>().enabled = true;
         }
+
 
         if (other.gameObject == Spaceship)
         {
@@ -109,7 +134,7 @@ public class QuestManager : MonoBehaviour {
         //TODO: add all the minerals in this if statement.
         if (PlayerPrefs.HasKey("hasEarthinite"))
         {
-            //prompt player if they want to return to earth.
+			//prompt player if they want to return to earth.
         }
     }
 }
