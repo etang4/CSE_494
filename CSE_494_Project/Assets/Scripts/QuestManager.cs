@@ -26,7 +26,10 @@ public class QuestManager : MonoBehaviour {
     void Awake()
     {
         //NEEDED FOR DEBUGGING
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.SetInt("hasSaturnite", 1);
+        //Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        //PlayerPrefs.SetString("EnteringPlanet", "Saturn");
     }
     // Use this for initialization
     void Start () {
@@ -46,6 +49,7 @@ public class QuestManager : MonoBehaviour {
     void readyToLeavePlanet()
     {
         //enable trigger zone around plane.
+        Application.LoadLevel(NextLevelToLoad);
     }
 
     void OnTriggerEnter(Collider other)
@@ -73,6 +77,28 @@ public class QuestManager : MonoBehaviour {
         }
 
         //CHECKS FOR MINERALS
+        if (other.gameObject.name == "Mercurite")
+        {
+            PlayerPrefs.SetInt("hasMercurite", 1);
+            other.gameObject.SetActive(false);
+            QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+            QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+            checkIfHasAllMinerals();
+            //Allow spaceship trigger
+            Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        }
+
+        if (other.gameObject.name == "Venusite")
+        {
+            PlayerPrefs.SetInt("hasVenusite", 1);
+            other.gameObject.SetActive(false);
+            QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+            QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+            checkIfHasAllMinerals();
+            //Allow spaceship trigger
+            Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        }
+
         //TODO: Needs the other planet's minerals
         if (other.gameObject.name == "Earthinite")
         {
@@ -85,19 +111,18 @@ public class QuestManager : MonoBehaviour {
             NPCZone.GetComponent<BoxCollider>().enabled = true;
         }
 
-		if (other.gameObject.name == "Venusite")
-		{
-			PlayerPrefs.SetInt("hasVenusite", 1);
-			other.gameObject.SetActive(false);
-			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
-			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
-			checkIfHasAllMinerals();
-			//Allow spaceship trigger
-			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
-		}
+        if (other.gameObject.name == "Marsite")
+        {
+            PlayerPrefs.SetInt("hasMarsite", 1);
+            other.gameObject.SetActive(false);
+            QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+            QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+            checkIfHasAllMinerals();
+            //Allow spaceship trigger
+            Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        }
 
-
-		if (other.gameObject.name == "Jupiterite")
+        if (other.gameObject.name == "Jupiterite")
 		{
 			PlayerPrefs.SetInt("hasJupiterite", 1);
 			other.gameObject.SetActive(false);
@@ -120,10 +145,32 @@ public class QuestManager : MonoBehaviour {
             Spaceship.GetComponent<CapsuleCollider>().enabled = true;
         }
 
+        if (other.gameObject.name == "Uranusite")
+        {
+            PlayerPrefs.SetInt("hasUranusite", 1);
+            other.gameObject.SetActive(false);
+            QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+            QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+            checkIfHasAllMinerals();
+            //Allow spaceship trigger
+            Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        }
+
+        if (other.gameObject.name == "Neptunerite")
+        {
+            PlayerPrefs.SetInt("hasNeptunerite", 1);
+            other.gameObject.SetActive(false);
+            QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+            QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+            checkIfHasAllMinerals();
+            //Allow spaceship trigger
+            Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+        }
+
 
         if (other.gameObject == Spaceship)
         {
-            Application.LoadLevel(NextLevelToLoad);
+            readyToLeavePlanet();   
         }
     }
 

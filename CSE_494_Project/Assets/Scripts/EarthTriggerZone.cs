@@ -7,18 +7,21 @@ public class EarthTriggerZone : MonoBehaviour {
     public GameObject playerSpaceship;
     
     public GameObject DialogUI;
+    
     public string CantEnterDialog;
     public string AskDialog;
     public GameObject Checkpoint;
     //Only for Earth
-    public bool CollectedAllMinerals;
     Text DialogText;
     Vector3 currentLocation;
     public bool isInTriggerZone;
+    public GameObject NoDialogUI;
+    Text NoDialogText;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         DialogText = DialogUI.transform.GetChild(1).GetComponent<Text>();
+        NoDialogText = NoDialogUI.transform.GetChild(1).GetComponent<Text>();
         currentLocation = playerSpaceship.transform.position;
         isInTriggerZone = false;
     }
@@ -28,7 +31,21 @@ public class EarthTriggerZone : MonoBehaviour {
         if (isInTriggerZone)
         {
             playerSpaceship.transform.position = currentLocation;
-            DialogUI.SetActive(true);
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1 &&
+                PlayerPrefs.GetInt("hasMarsite") == 1 &&
+                PlayerPrefs.GetInt("hasJupiterite") == 1 &&
+                PlayerPrefs.GetInt("hasSaturnite") == 1 &&
+                PlayerPrefs.GetInt("hasUranusite") == 1 &&
+                PlayerPrefs.GetInt("hasNeptunerite") == 1)
+            {
+                DialogUI.SetActive(true);
+            }
+            else
+            {
+                NoDialogUI.SetActive(true);
+            }
         }
     }
     
@@ -38,8 +55,22 @@ public class EarthTriggerZone : MonoBehaviour {
         {
             isInTriggerZone = true;
             currentLocation = playerSpaceship.transform.position;
-            DialogText.text = AskDialog;
-            PlayerPrefs.SetString("EnteringPlanet","Earth");
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1 &&
+                PlayerPrefs.GetInt("hasMarsite") == 1 &&
+                PlayerPrefs.GetInt("hasJupiterite") == 1 &&
+                PlayerPrefs.GetInt("hasSaturnite") == 1 &&
+                PlayerPrefs.GetInt("hasUranusite") == 1 &&
+                PlayerPrefs.GetInt("hasNeptunerite") == 1)
+            {
+                DialogText.text = AskDialog;
+            }
+            else
+            {
+                NoDialogText.text = CantEnterDialog;
+            }
+            PlayerPrefs.SetString("EnteringPlanet", "Earth");
         }
     }
 }

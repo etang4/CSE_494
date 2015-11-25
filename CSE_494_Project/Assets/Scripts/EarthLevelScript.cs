@@ -15,6 +15,7 @@ public class EarthLevelScript : MonoBehaviour {
     public string[] textPanels;
     public string[] NPCCollectedMineraltextPanels;
     public string[] CollectedMineraltextPanels;
+    public bool backOnEarth;
     Text textPanelText;
     Text NPCTalkingTitle;
     int sizeOfTextPanels;
@@ -25,25 +26,34 @@ public class EarthLevelScript : MonoBehaviour {
         textPanelText = DialogPanel.transform.GetChild(1).GetComponent<Text>();
         NPCTalkingTitle = DialogPanel.transform.GetChild(0).GetComponent<Text>();
         sizeOfTextPanels = textPanels.Length;
+        PlayerPrefs.SetString("EnteringPlanet", "None");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (PlayerPrefs.HasKey("hasEarthinite"))
-        {
-            textPanelText.text = CollectedMineraltextPanels[currentPanel];
-            NPCTalkingTitle.text = NPCCollectedMineraltextPanels[currentPanel];
-            //Finished second dialog
-            if (currentPanel >= sizeOfTextPanels - 1)
-            {
-                //Enable trigger for spaceship to load next level
-                player.GetComponent<QuestManager>().Spaceship.GetComponent<CapsuleCollider>().enabled = true;
-            }
-        }
-        else
+        if (backOnEarth)
         {
             textPanelText.text = textPanels[currentPanel];
             NPCTalkingTitle.text = NPCTextPanels[currentPanel];
+        }
+        else
+        {
+            if (PlayerPrefs.HasKey("hasEarthinite"))
+            {
+                textPanelText.text = CollectedMineraltextPanels[currentPanel];
+                NPCTalkingTitle.text = NPCCollectedMineraltextPanels[currentPanel];
+                //Finished second dialog
+                if (currentPanel >= sizeOfTextPanels - 1)
+                {
+                    //Enable trigger for spaceship to load next level
+                    player.GetComponent<QuestManager>().Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+                }
+            }
+            else
+            {
+                textPanelText.text = textPanels[currentPanel];
+                NPCTalkingTitle.text = NPCTextPanels[currentPanel];
+            }
         }
 	}
 
@@ -55,19 +65,27 @@ public class EarthLevelScript : MonoBehaviour {
         }
         else
         {
-            DialogPanel.gameObject.SetActive(false);
-            player.GetComponent<CharacterController>().enabled = true;
-            player.GetComponent<FirstPersonController>().enabled = true;
-            sizeOfTextPanels = CollectedMineraltextPanels.Length;
-            currentPanel = 0;
-            //First time talking to Dr. Nelson
-            if (!PlayerPrefs.HasKey("hasEarthinite"))
+            if (backOnEarth)
             {
-                GameObject.Find("Dexter").GetComponent<DexterAI>().canMove = true;
-                QuestPanel.gameObject.SetActive(true);
-                QuestButton.gameObject.SetActive(true);
-                InfoPanel.gameObject.SetActive(true);
-                InfoButton.gameObject.SetActive(true);
+                //Fade out?
+                Application.LoadLevel(0);
+            }
+            else
+            {
+                DialogPanel.gameObject.SetActive(false);
+                player.GetComponent<CharacterController>().enabled = true;
+                player.GetComponent<FirstPersonController>().enabled = true;
+                sizeOfTextPanels = CollectedMineraltextPanels.Length;
+                currentPanel = 0;
+                //First time talking to Dr. Nelson
+                if (!PlayerPrefs.HasKey("hasEarthinite"))
+                {
+                    GameObject.Find("Dexter").GetComponent<DexterAI>().canMove = true;
+                    QuestPanel.gameObject.SetActive(true);
+                    QuestButton.gameObject.SetActive(true);
+                    InfoPanel.gameObject.SetActive(true);
+                    InfoButton.gameObject.SetActive(true);
+                }
             }
         }
     }

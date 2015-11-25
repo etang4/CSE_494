@@ -50,8 +50,8 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         private void Start()
         {
             m_MaxEnginePowerOriginal = m_MaxEnginePower;
-            m_MaxEnginePowerOriginal2 = m_MaxEnginePower * 10;
-            m_MaxEnginePowerOriginal3 = m_MaxEnginePower * 100;
+            m_MaxEnginePowerOriginal2 = m_MaxEnginePower * 5;
+            m_MaxEnginePowerOriginal3 = m_MaxEnginePower * 50;
             m_Rigidbody = GetComponent<Rigidbody>();
             // Store original drag settings, these are modified during flight.
             m_OriginalDrag = m_Rigidbody.drag;
@@ -68,17 +68,32 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         void Update()
         {
+            //MODIFIED Portion by Eric
+            //if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    m_MaxEnginePower = m_MaxEnginePowerOriginal;
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha2) )//&& PlayerPrefs.GetInt("hasMercurite") == 1)
+            //{
+            //    m_MaxEnginePower = m_MaxEnginePowerOriginal2;
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha3) )//&& PlayerPrefs.GetInt("hasJupiterite") == 1)
+            //{
+            //    m_MaxEnginePower = m_MaxEnginePowerOriginal3;
+            //}
+
+            //Debug Purposes
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 m_MaxEnginePower = m_MaxEnginePowerOriginal;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2))//&& PlayerPrefs.GetInt("hasMercurite") == 1)
             {
-                m_MaxEnginePower = m_MaxEnginePowerOriginal2;
+                m_MaxEnginePower = m_MaxEnginePowerOriginal2 *2;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Alpha3))//&& PlayerPrefs.GetInt("hasJupiterite") == 1)
             {
-                m_MaxEnginePower = m_MaxEnginePowerOriginal3;
+                m_MaxEnginePower = m_MaxEnginePowerOriginal3 *2;
             }
         }
 

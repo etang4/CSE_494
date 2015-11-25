@@ -7,17 +7,20 @@ public class UranusTriggerZone : MonoBehaviour {
     public GameObject playerSpaceship;
     
     public GameObject DialogUI;
+    public GameObject NoDialogUI;
     public string CantEnterDialog;
     public string AskDialog;
     public GameObject Checkpoint;
     public bool CollectedAllMinerals;
     Text DialogText;
+    Text NoDialogText;
     Vector3 currentLocation;
     public bool isInTriggerZone;
 
 	// Use this for initialization
 	void Start () {
         DialogText = DialogUI.transform.GetChild(1).GetComponent<Text>();
+        NoDialogText = NoDialogUI.transform.GetChild(1).GetComponent<Text>();
         currentLocation = playerSpaceship.transform.position;
         isInTriggerZone = false;
     }
@@ -27,7 +30,19 @@ public class UranusTriggerZone : MonoBehaviour {
         if (isInTriggerZone)
         {
             playerSpaceship.transform.position = currentLocation;
-            DialogUI.SetActive(true);
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1 &&
+                PlayerPrefs.GetInt("hasMarsite") == 1 &&
+                PlayerPrefs.GetInt("hasJupiterite") == 1 &&
+                PlayerPrefs.GetInt("hasSaturnite") == 1)
+            {
+                DialogUI.SetActive(true);
+            }
+            else
+            {
+                NoDialogUI.SetActive(true);
+            }
         }
     }
     
@@ -37,7 +52,19 @@ public class UranusTriggerZone : MonoBehaviour {
         {
             isInTriggerZone = true;
             currentLocation = playerSpaceship.transform.position;
-            DialogText.text = AskDialog;
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1 &&
+                PlayerPrefs.GetInt("hasMarsite") == 1 &&
+                PlayerPrefs.GetInt("hasJupiterite") == 1 &&
+                PlayerPrefs.GetInt("hasSaturnite") == 1)
+            {
+                DialogText.text = AskDialog;
+            }
+            else
+            {
+                NoDialogText.text = CantEnterDialog;
+            }
             PlayerPrefs.SetString("EnteringPlanet","Uranus");
         }
     }

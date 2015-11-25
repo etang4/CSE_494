@@ -14,10 +14,13 @@ public class MarsTriggerZone : MonoBehaviour {
     Text DialogText;
     Vector3 currentLocation;
     public bool isInTriggerZone;
+    public GameObject NoDialogUI;
+    Text NoDialogText;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         DialogText = DialogUI.transform.GetChild(1).GetComponent<Text>();
+        NoDialogText = NoDialogUI.transform.GetChild(1).GetComponent<Text>();
         currentLocation = playerSpaceship.transform.position;
         isInTriggerZone = false;
     }
@@ -27,7 +30,16 @@ public class MarsTriggerZone : MonoBehaviour {
         if (isInTriggerZone)
         {
             playerSpaceship.transform.position = currentLocation;
-            DialogUI.SetActive(true);
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1)
+            {
+                DialogUI.SetActive(true);
+            }
+            else
+            {
+                NoDialogUI.SetActive(true);
+            }
         }
     }
     
@@ -37,7 +49,16 @@ public class MarsTriggerZone : MonoBehaviour {
         {
             isInTriggerZone = true;
             currentLocation = playerSpaceship.transform.position;
-            DialogText.text = AskDialog;
+            if (PlayerPrefs.GetInt("hasMercurite") == 1 &&
+                PlayerPrefs.GetInt("hasVenusite") == 1 &&
+                PlayerPrefs.GetInt("hasEarthinite") == 1)
+            {
+                DialogText.text = AskDialog;
+            }
+            else
+            {
+                NoDialogText.text = CantEnterDialog;
+            }
             PlayerPrefs.SetString("EnteringPlanet","Mars");
         }
     }
