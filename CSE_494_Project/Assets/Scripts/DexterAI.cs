@@ -28,15 +28,16 @@ public class DexterAI : MonoBehaviour {
                     Quaternion.LookRotation(player.transform.position - this.gameObject.transform.position), rotationSpeed * Time.deltaTime);
             }
             //if Dexter is at the target and the player is not.Stop and look at player.
-            else if (Vector3.Distance(this.gameObject.transform.position, targetPath[currentTarget].transform.position) < 0.5f &&
+            if (Vector3.Distance(this.gameObject.transform.position, targetPath[currentTarget].transform.position) < 0.5f &&
                 Vector3.Distance(player.transform.position, targetPath[currentTarget].transform.position) > distanceFromTarget)
             {
                 this.gameObject.transform.rotation = Quaternion.Slerp(this.gameObject.transform.rotation, 
                     Quaternion.LookRotation(player.transform.position - this.gameObject.transform.position), rotationSpeed * Time.deltaTime);
             }
-            else if(Vector3.Distance(player.transform.position, targetPath[currentTarget].transform.position) < distanceFromTarget)
+            if(Vector3.Distance(player.transform.position, targetPath[currentTarget].transform.position) < distanceFromTarget)
             {
                 currentTarget++;
+                Debug.Log(Vector3.Distance(player.transform.position, targetPath[currentTarget].transform.position));
             }
             //Otherwise go to next target
             else

@@ -111,6 +111,7 @@ public class QuestManager : MonoBehaviour {
             NPCZone.GetComponent<BoxCollider>().enabled = true;
         }
 
+
         if (other.gameObject.name == "Marsite")
         {
             PlayerPrefs.SetInt("hasMarsite", 1);
@@ -121,6 +122,40 @@ public class QuestManager : MonoBehaviour {
             //Allow spaceship trigger
             Spaceship.GetComponent<CapsuleCollider>().enabled = true;
         }
+
+		if (other.gameObject.name == "Mercurite")
+		{
+			PlayerPrefs.SetInt("hasMercurite", 1);
+			other.gameObject.SetActive(false);
+			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+			checkIfHasAllMinerals();
+			//Allow spaceship trigger
+			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+		}
+
+		if (other.gameObject.name == "Venusite")
+		{
+			PlayerPrefs.SetInt("hasVenusite", 1);
+			other.gameObject.SetActive(false);
+			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+			checkIfHasAllMinerals();
+			//Allow spaceship trigger
+			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+		}
+
+		if (other.gameObject.name == "Marsite")
+		{
+			PlayerPrefs.SetInt("hasMarsite", 1);
+			other.gameObject.SetActive(false);
+			QuestPanelText.GetComponent<QuestDialog>().NeedToCollectMineral = false;
+			QuestPanelText.GetComponent<QuestDialog>().NeedToTalkToNPC = true;
+			checkIfHasAllMinerals();
+			//Allow spaceship trigger
+			Spaceship.GetComponent<CapsuleCollider>().enabled = true;
+		}
+
 
         if (other.gameObject.name == "Jupiterite")
 		{

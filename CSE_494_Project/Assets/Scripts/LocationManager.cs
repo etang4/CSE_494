@@ -15,7 +15,7 @@ public class LocationManager : MonoBehaviour {
     void Awake () {
         //DEBUG
         //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.SetString("EnteringPlanet", "None");
+        ////PlayerPrefs.SetString("EnteringPlanet", "None");
         //PlayerPrefs.SetInt("hasMercurite", 1);
         //PlayerPrefs.SetInt("hasVenusite", 1);
         //PlayerPrefs.SetInt("hasEarthinite", 1);
